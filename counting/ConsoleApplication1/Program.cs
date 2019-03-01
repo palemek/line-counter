@@ -23,7 +23,7 @@ namespace LineCounter
         {
             string temp = "";
             for (int i = 0; i < _i; i++)
-                temp += " ";
+                temp += ' ';
             return temp;
         }
 
@@ -103,6 +103,8 @@ namespace LineCounter
             string printComment = "";
             string printSize = "";
 
+            int length = 10;
+
             for (int i = 0; i < ext.Count; i++)
             {
                 lines.Add(0);
@@ -121,14 +123,13 @@ namespace LineCounter
                     files[i]++;
                 }
 
-                int length = 10;
 
                 printExt        += empty(length - ext[i].Length) + ext[i];
                 printFiles      += empty(length - files[i].ToString().Length) + files[i];
                 int trueLines = (lines[i] + clears[i] + comments[i]);
-                printLines      += empty(length - trueLines.ToString().Length) + trueLines;
+                printLines      += empty(length - trueLines.ToString().Length)+ trueLines;
                 printCodes      += empty(length - lines[i].ToString().Length) + lines[i];
-                printSmall      += empty(length - smalllines[i].ToString().Length) + smalllines[i];
+                printSmall      += empty(length - smalllines[i].ToString().Length)+ smalllines[i];
                 printClear      += empty(length - clears[i].ToString().Length) + clears[i];
                 printComment    += empty(length - comments[i].ToString().Length) + comments[i];
                 int sizeSize = (sizes[i] / 1024);
@@ -153,14 +154,14 @@ namespace LineCounter
                 totalSmall += smalllines[i];
             }
             Console.WriteLine();
-            Console.WriteLine("Summary:                             total{0}",printExt);
-            Console.WriteLine(">>files with searched extensions:    {0}{1}", totalFiles, printFiles);
-            Console.WriteLine(">>lines:                             {0}{1}", totalLines + totalClears + totalComments, printLines);
-            Console.WriteLine(">>   code lines:                     {0}{1}", totalLines, printCodes);
-            Console.WriteLine(">>       (less then 3 characters):   {0}{1}", totalSmall, printSmall);
-            Console.WriteLine(">>   clear lines(spaces or tabs):    {0}{1}", totalClears, printClear);
-            Console.WriteLine(">>   comment lines                   {0}{1}", totalComments, printComment);
-            Console.WriteLine(">>size of files(kilobytes):          {0}{1}", totalSize/1024, printSize);
+            Console.WriteLine("Summary:                                  total{0}", printExt);
+            Console.WriteLine(">>files with searched extensions:    {0}{1}{2}", empty(length - totalFiles.ToString().Length), totalFiles, printFiles);
+            Console.WriteLine(">>lines:                             {0}{1}{2}", empty(length - (totalLines + totalClears + totalComments).ToString().Length), totalLines + totalClears + totalComments, printLines);
+            Console.WriteLine(">>   code lines:                     {0}{1}{2}", empty(length - totalLines.ToString().Length), totalLines, printCodes);
+            Console.WriteLine(">>       (less then 3 characters):   {0}{1}{2}", empty(length - totalSmall.ToString().Length), totalSmall, printSmall);
+            Console.WriteLine(">>   clear lines(spaces or tabs):    {0}{1}{2}", empty(length - totalClears.ToString().Length), totalClears, printClear);
+            Console.WriteLine(">>   comment lines                   {0}{1}{2}", empty(length - totalComments.ToString().Length), totalComments, printComment);
+            Console.WriteLine(">>size of files(kilobytes):          {0}{1}{2}", empty(length - (totalSize / 1024).ToString().Length), totalSize / 1024, printSize);
         }
 
         static void getThem(string sdir)
